@@ -14,9 +14,13 @@ class HtmlNode():
         
         if len(self.props) == 0:
             return ""
-        
-        return ""
-        # for i in range(0, len(self.props)):
-        #     entry = self.props[i]
-        #     keyvalue = f"{entry}={self.props[entry]}"
-        
+
+        html = ''
+        for entry in self.props:
+            html += (f' {entry}="{self.props[entry]}"')
+
+        return html
+    
+    def __repr__(self):
+        return f'HtmlNode\nTag={self.tag}\nValue={self.value}\nChildren={self.children}\nProps={self.props}'
+    
