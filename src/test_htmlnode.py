@@ -7,3 +7,8 @@ class TestHtmlNode(unittest.TestCase):
         node = HtmlNode()
         html_props = node.props_to_html()
         self.assertEqual(html_props, '')
+
+    def test_one_props_to_html(self):
+        node = HtmlNode(props={"target": "test_env"})
+        html_props = node.props_to_html()
+        self.assertEqual(html_props, ' target="test_env"')
