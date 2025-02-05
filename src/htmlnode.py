@@ -9,7 +9,7 @@ class HtmlNode():
         raise NotImplementedError('method should be implemented by child classes')
     
     def props_to_html(self):
-        if self.props == None:
+        if self.props is None:
             return ''
         
         html = ''
@@ -17,3 +17,10 @@ class HtmlNode():
             html += f' {entry}="{self.props[entry]}"'
         
         return html
+    
+    def __repr__(self):
+        text = f'{self.tag}, {self.value}, {self.props_to_html}'
+        if self.children is not None:
+            for child in self.children:
+                text += f'\tchild: {child}\n'
+        
