@@ -12,3 +12,8 @@ class TestHtmlNode(unittest.TestCase):
         node = HtmlNode(props={"target": "test_env"})
         html_props = node.props_to_html()
         self.assertEqual(html_props, ' target="test_env"')
+
+    def test_two_props_to_html(self):
+        node = HtmlNode(props={"href":"www.test.com", "target":"prod"})
+        html_props = node.props_to_html()
+        self.assertEqual(html_props, ' href="www.test.com" target="prod"')
