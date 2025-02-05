@@ -11,4 +11,9 @@ class ParentNode(HtmlNode):
         if self.children is None or len(self.children) == 0:
             raise ValueError('parent node must contain at least one child')
         
-        pass
+        html = self.start_tag_to_html()
+        for node in self.children:
+            html += node.to_html()
+
+        html += self.end_tag_to_html()
+        return html
