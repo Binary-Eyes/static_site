@@ -5,9 +5,24 @@ class HtmlNode():
         self.children = children
         self.props = props
 
+
     def to_html(self):
         raise NotImplementedError('method should be implemented by child classes')
     
+
+    def end_tag_to_html(self):
+        if self.tag is None or self.tag == '':
+            return ''
+
+        return f'</{self.tag}>'
+    
+
+    def start_tag_to_html(self):
+        if self.tag is None or self.tag == '':
+            return ''
+        return f'<{self.tag}{self.props_to_html()}>'
+        
+
     def props_to_html(self):
         if self.props is None:
             return ''

@@ -17,3 +17,17 @@ class TestHtmlNode(unittest.TestCase):
         node = HtmlNode(props={"href":"www.test.com", "target":"prod"})
         html_props = node.props_to_html()
         self.assertEqual(html_props, ' href="www.test.com" target="prod"')
+
+    def test_tag_without_props_to_html(self):
+        node = HtmlNode("a")
+        start_tag = node.start_tag_to_html()
+        end_tag = node.end_tag_to_html()
+        self.assertEqual(start_tag, "<a>")
+        self.assertEqual(end_tag, "</a>")
+
+    def test_tag_with_props_to_html(self):
+        node = HtmlNode("a", props={"href":"www.test.co.il"})
+        start_tag = node.start_tag_to_html()
+        end_tag = node.end_tag_to_html()
+        self.assertEqual(start_tag, '<a href="www.test.co.il">')
+        self.assertEqual(end_tag, "</a>")
