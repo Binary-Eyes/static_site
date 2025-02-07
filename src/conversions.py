@@ -9,5 +9,12 @@ def text_node_to_html_node(text_node: TextNode):
         return LeafNode(tag='b', value=text_node.text)
     if type == TextNodeType.ITALIC:
         return LeafNode(tag='i', value=text_node.text)
-    pass
+    if type == TextNodeType.CODE:
+        return LeafNode(tag='code', value=text_node.text)
+    if type == TextNodeType.LINK:
+        return LeafNode(tag='a', value=text_node.text, props={"href":f"{text_node.url}"})
+    if type == TextNodeType.IMAGE:
+        return LeafNode(tag='img', value='', props={"src": f"{text_node.url}", "alt": f'{text_node.value}'})
+    
+    raise ValueError(f'unknown text-node type: {text_node.text_type}')
     
