@@ -18,11 +18,21 @@ def text_node_to_html_node(text_node: TextNode):
     
     raise ValueError(f'unknown text-node type: {text_node.node_type}')
 
-def split_nodes_delimiter(old_nodes, delimiter, text_type):
-    split_nodes = []
-    for source_node in old_nodes:
-        if source_node.node_type == TextType.TEXT:
-            split_nodes.append(source_node)
+def split_nodes_delimiter(source_nodes, delimiter, text_type):
+    target_nodes = []
+    for source_node in source_nodes:
+        if source_node.node_type != TextType.TEXT:
+            target_nodes.append(source_node)
+            continue
 
-    return split_nodes
+        text = source_node.text
+        delimiter_count = text.count(delimiter)
+        if delimiter_count == 0:
+            target_nodes.append(source_node)
+            continue
+
+        split_nodes = source_node.text.split(delimiter)
+        target_nodes.extend(split_nodes)
+
+    return target_nodes
     
