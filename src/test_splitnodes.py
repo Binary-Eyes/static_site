@@ -5,7 +5,7 @@ from conversions import split_nodes_delimiter
 
 class TestSplittingTextNodeWithOneCodeBlock(unittest.TestCase):
     def test_should_return_three_nodes(self):
-        node = TextNode("the code snippet 'float a = 1.0' sets a floating-point value")
+        node = TextNode("the code snippet 'float a = 1.0' sets a floating-point value", TextType.TEXT)
         split = split_nodes_delimiter([node], "'", TextType.CODE)
         self.assertEqual(len(split), 3)
         pass
