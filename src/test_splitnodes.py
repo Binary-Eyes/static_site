@@ -1,7 +1,7 @@
 import unittest
 
 from textnode import TextNode, TextType
-from conversions import split_nodes_delimiter
+from nodesplit import split_nodes_delimiter
 
 class TestSplittingTextNodeWithOneCodeBlock(unittest.TestCase):
     def test_should_return_three_nodes(self):
