@@ -31,8 +31,14 @@ def split_nodes_delimiter(source_nodes, delimiter, text_type):
             target_nodes.append(source_node)
             continue
 
-        split_nodes = source_node.text.split(delimiter)
-        target_nodes.extend(split_nodes)
+        split_text = source_node.text.split(delimiter)
+        for i in range(0, len(split_text)):
+            node = None
+            if i%2 == 0:
+                node = TextNode(split_text[i], TextType.TEXT)
+            else:
+                node = TextNode(split_text[i], text_type)
+
+            target_nodes.append(node)
 
     return target_nodes
-    
