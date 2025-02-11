@@ -1,5 +1,13 @@
 from textnode import TextNode, TextType
 
+def split_nodes_link(source_nodes):
+    split_nodes = []
+    for source_node in source_nodes:
+        split_nodes.append(source_node)
+
+    return split_nodes
+
+
 def split_nodes_delimiter(source_nodes, delimiter, text_type):
     target_nodes = []
     for source_node in source_nodes:
