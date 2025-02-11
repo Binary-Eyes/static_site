@@ -1,9 +1,15 @@
 from textnode import TextNode, TextType
+from extractions import extract_markdown_links, extract_markdown_images
 
 def split_nodes_link(source_nodes):
-    split_nodes = []
+    split_nodes = []    
     for source_node in source_nodes:
-        split_nodes.append(source_node)
+        links = extract_markdown_links(source_node.text)
+        total_links = len(links)
+        if total_links == 0:
+            split_nodes.append(source_node)
+        else:
+            continue
 
     return split_nodes
 
