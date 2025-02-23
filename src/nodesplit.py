@@ -22,7 +22,7 @@ def split_nodes_image(source_nodes):
 
         split_nodes.append(TextNode(image[0], TextType.IMAGE, image[1]))
         last = TextNode(split_text[1], TextType.TEXT)
-        split_nodes.extend(split_nodes_link([last]))
+        split_nodes.extend(split_nodes_image([last]))
 
     return split_nodes
 

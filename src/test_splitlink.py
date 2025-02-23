@@ -29,6 +29,7 @@ class TestSplittingNodeNoLinks(unittest.TestCase):
         node = TextNode("this is a node without a link", TextType.TEXT)
         split = split_nodes_link([node])
         self.assertEqual(len(split), 1)
+        
 
     def test_should_return_expected_text_node(self):
         node = TextNode("this is a node without a link", TextType.TEXT)

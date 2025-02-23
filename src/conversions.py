@@ -1,5 +1,20 @@
 from textnode import TextNode, TextType
 from leafnode import LeafNode
+from nodesplit import split_nodes_image, split_nodes_delimiter, split_nodes_link
+
+def text_to_textnodes(text):
+    if len(text) == 0:
+        return []
+    
+    nodes = []
+    source = TextNode(text, TextType.TEXT)
+    bold_nodes = split_nodes_delimiter([source], "**", TextType.BOLD)
+    italic_nodes = split_nodes_delimiter([source], "*", TextType.ITALIC)
+    code_nodes = split_nodes_delimiter([source], "`", TextType.CODE)
+    image_nodes = split_nodes_image([source])
+    link_nodes = split_nodes_link([source])
+
+    return nodes
 
 def text_node_to_html_node(text_node: TextNode):
     type = text_node.node_type
