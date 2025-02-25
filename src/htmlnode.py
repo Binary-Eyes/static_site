@@ -17,3 +17,6 @@ class HtmlNode():
             html += f' {entry}="{self.props[entry]}"'
         
         return html
+    
+    def __repr__(self):
+        return f'HtmlNode({self.tag} {self.value} {self.children} {self.props})'
