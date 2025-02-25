@@ -5,7 +5,7 @@ from htmlnode import *
 class TestHtmlNodeProps(unittest.TestCase):
     def test_empty_props_should_return_none(self):
         node = HtmlNode()
-        self.assertEqual(node.props_to_html(), None)
+        self.assertEqual(node.props_to_html(), '')
 
     def test_single_property_returns_expected(self):
         node = HtmlNode(props={"href": "https://www.google.com"})
