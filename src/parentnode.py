@@ -15,6 +15,6 @@ class ParentNode(HtmlNode):
         html = f'<{self.tag}{props}>'
         for child in self.children:
             html += child.to_html()
-
+            
         html += f'</{self.tag}>'
         return html

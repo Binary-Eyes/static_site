@@ -20,4 +20,16 @@ class TestParentWithOneChild(unittest.TestCase):
         html = node.to_html()
         self.assertEqual(html, '<a><b>do not</b></a>')
 
+class TestParentWithMultipleChildren(unittest.TestCase):
+    def test_should_return_expected(self):
+        node = ParentNode(
+            "p", 
+            [
+                LeafNode("b", "Bold text"),
+                LeafNode(None, "Normal text"),
+                LeafNode("i", "italic text"),
+                LeafNode(None, "Normal text"),
+            ])
+        html = node.to_html()
+        self.assertEqual(html, '<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>')
 
