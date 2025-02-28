@@ -1,6 +1,6 @@
 import unittest
 
-from leafnode import *
+from htmlnode import LeafNode
 
 class TestLeafNodeToHtml(unittest.TestCase):
     def test_should_fail_when_no_value(self):

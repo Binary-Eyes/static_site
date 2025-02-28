@@ -1,7 +1,6 @@
 import unittest
 
-from parentnode import *
-from leafnode import *
+from htmlnode import ParentNode, LeafNode
 
 class TestParentNodeWithoutTag(unittest.TestCase):
     def test_should_fail(self):
