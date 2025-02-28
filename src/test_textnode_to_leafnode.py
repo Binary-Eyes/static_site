@@ -16,4 +16,20 @@ class TestTextNodeConversion(unittest.TestCase):
         self.assertEqual(html_node.tag, None)
     
     def test_should_return_correct_html_text(self):
-        pass
+        node = TextNode("it was the best of time", TextType.NORMAL)
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.value, 'it was the best of time')
+
+class TestBoldTextConvert(unittest.TestCase):
+    def test_should_return_expected_node(self):
+        text_node = TextNode("bold!", TextType.BOLD)
+        html_node = text_node_to_html_node(text_node)
+        self.assertEqual(html_node.tag, 'b')
+        self.assertEqual(html_node.value, 'bold!')
+
+class TestItalicTextConvert(unittest.TestCase):
+    def test_should_return_expected_node(self):
+        text_node = TextNode('your name', TextType.ITALIC)
+        html_node = text_node_to_html_node(text_node)
+        self.assertEqual(html_node.tag, 'i')
+        self.assertEqual(html_node.value, 'your name')
