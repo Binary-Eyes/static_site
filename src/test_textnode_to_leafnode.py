@@ -33,3 +33,10 @@ class TestItalicTextConvert(unittest.TestCase):
         html_node = text_node_to_html_node(text_node)
         self.assertEqual(html_node.tag, 'i')
         self.assertEqual(html_node.value, 'your name')
+
+class TestCodeTextConvert(unittest.TestCase):
+    def test_should_return_expected_node(self):
+        text_node = TextNode('printf("Hello, World!");', TextType.CODE)
+        html_node = text_node_to_html_node(text_node)
+        self.assertEqual(html_node.tag, "code")
+        self.assertEqual(html_node.value, 'printf("Hello, World!");')
