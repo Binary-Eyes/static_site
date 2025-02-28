@@ -40,3 +40,20 @@ class TestCodeTextConvert(unittest.TestCase):
         html_node = text_node_to_html_node(text_node)
         self.assertEqual(html_node.tag, "code")
         self.assertEqual(html_node.value, 'printf("Hello, World!");')
+
+class TestLinkTextConvert(unittest.TestCase):
+    def test_should_return_expected_node(self):
+        text_node = TextNode("google", TextType.LINK, "www.google.com")
+        html_node = text_node_to_html_node(text_node)
+        self.assertEqual(html_node.tag, "a")
+        self.assertEqual(html_node.value, "google")
+        self.assertEqual(len(html_node.props), 1)
+        self.assertEqual(html_node.props['href'], "www.google.com")
+
+class TestImageTextConvert(unittest.TestCase):
+    def test_should_return_expected_node(self):
+        text_node = TextNode('cat', TextType.IMAGE, 'cat.png')
+        html_node = text_node_to_html_node(text_node)
+        self.assertEqual(html_node.tag, "img")
+        self.assertEqual(html_node.value, "")
+        self.assertEqual(len(html_node.props), 2)
