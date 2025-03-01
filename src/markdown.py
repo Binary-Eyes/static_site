@@ -1,4 +1,4 @@
-from textnode import TextType
+from textnode import *
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     if len(old_nodes) == 0:
@@ -13,5 +13,14 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         split = old_node.text.split(delimiter)
         if len(split) % 2 == 0:
             raise Exception(f'at least one delimiter in text is not closed: {old_node.text} [{delimiter}]')
+        
+        for i in range(0, len(split)):
+            if len(split[i]) == 0:
+                continue
+
+            node_type = TextType.TEXT
+            if i%2 != 0:
+                node_type = text_type
+            new_nodes.append(TextNode(split[i], node_type))
 
     return new_nodes
