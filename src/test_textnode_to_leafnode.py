@@ -9,12 +9,12 @@ class TestUnknownTextType(unittest.TestCase):
 
 class TestTextNodeConversion(unittest.TestCase):
     def test_should_return_html_no_tag(self):
-        node = TextNode("it was the best of time", TextType.NORMAL)
+        node = TextNode("it was the best of time", TextType.TEXT)
         html_node = text_node_to_html_node(node)
         self.assertEqual(html_node.tag, None)
     
     def test_should_return_correct_html_text(self):
-        node = TextNode("it was the best of time", TextType.NORMAL)
+        node = TextNode("it was the best of time", TextType.TEXT)
         html_node = text_node_to_html_node(node)
         self.assertEqual(html_node.value, 'it was the best of time')
 
