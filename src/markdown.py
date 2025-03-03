@@ -1,4 +1,8 @@
+import re
 from textnode import *
+
+def extract_markdown_images(text):
+    return re.findall(r"!\[([^\[\]]*)\]\(([^\(\)]*)\)", text)
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     if len(old_nodes) == 0:
