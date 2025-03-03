@@ -1,6 +1,14 @@
 import unittest
 
-from markdown import extract_markdown_images
+from markdown import extract_markdown_images, extract_markdown_links
+
+class TestExtractLinksFromMarkdown(unittest.TestCase):
+    def get_matches(self):
+        text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
+        return extract_markdown_links(text)
+    
+    def test_should_return_two_matches(self):
+        self.assertEqual(len(self.get_matches()), 2)
 
 class TestExtractImagesFromMarkdown(unittest.TestCase):
     def get_matches(self):
