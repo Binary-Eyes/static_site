@@ -33,14 +33,14 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
     return new_nodes
 
 def split_nodes_image(old_nodes):
-    split = []
+    new_nodes = []
     for old_node in old_nodes:
         if old_node.text == '':
             continue
 
         images = extract_markdown_images(old_node.text)
         if len(images) == 0:
-            split.append(old_node)
+            new_nodes.append(old_node)
             continue
-
-    return split
+        
+    return new_nodes
