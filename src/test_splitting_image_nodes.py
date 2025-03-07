@@ -42,3 +42,9 @@ class TestSplittingNodeWithOneImageOnRight(unittest.TestCase):
         node = TextNode("image string ![image](www.image.png)", TextType.TEXT)
         split = split_nodes_image([node])
         self.assertEqual(len(split), 2)
+
+class TestSplittingNodeWithMutlipleImages(unittest.TestCase):
+    def test_should_return_expected_node_count(self):
+        node = TextNode("This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)", TextType.TEXT)
+        split = split_nodes_image([node])
+        self.assertEqual(len(split), 4)
