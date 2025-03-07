@@ -1,5 +1,14 @@
 import re
-from textnode import *
+from enum import Enum
+from textnode import TextNode, TextType
+
+class BlockType(Enum):
+    PARAGRAPH = "paragraph",
+    HEADING = "heading",
+    CODE = "code",
+    QUOTE = "quote",
+    UNORDERED_LIST = "unordered_list",
+    ORDERED_LIST = "ordered_list"    
 
 def extract_markdown_links(text):
     return re.findall(r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)", text)
