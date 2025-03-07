@@ -7,6 +7,10 @@ class TestDeteminingBlockType(unittest.TestCase):
         type = detemine_block_type("## Heading!")
         self.assertEqual(type, BlockType.HEADING)
 
+    def test_should_recognize_quote(self):
+        type = detemine_block_type(">A\n>B")
+        self.assertEqual(type, BlockType.QUOTE)
+
     def test_should_recognize_code(self):
         type = detemine_block_type("""```
 public static class Program

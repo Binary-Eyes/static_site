@@ -19,6 +19,16 @@ def detemine_block_type(text):
             raise ValueError("block starts as code but ending tag is missing!")
         return BlockType.CODE
 
+    lines = text.splitlines()
+    if all(line.startswith(">") for line in lines):        
+        return BlockType.QUOTE
+    
+    if all(line.startswith("-") for line in lines):
+        return BlockType.UNORDERED_LIST
+
+    if all(line.startswith("*") for line in lines):
+        return BlockType.ORDERED_LIST
+
     return BlockType.PARAGRAPH
 
 def extract_markdown_links(text):
