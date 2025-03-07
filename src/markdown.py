@@ -10,6 +10,17 @@ class BlockType(Enum):
     UNORDERED_LIST = "unordered_list",
     ORDERED_LIST = "ordered_list"    
 
+def detemine_block_type(text):
+    if text[0] == '#':
+        return BlockType.HEADING
+    
+    if text[:3] == "```":
+        if text[-3:] != "```":
+            raise ValueError("block starts as code but ending tag is missing!")
+        return BlockType.CODE
+
+    return BlockType.PARAGRAPH
+
 def extract_markdown_links(text):
     return re.findall(r"(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)", text)
 

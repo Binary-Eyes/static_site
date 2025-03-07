@@ -1,6 +1,23 @@
 import unittest
 
-from markdown import markdown_to_blocks
+from markdown import markdown_to_blocks, detemine_block_type, BlockType
+
+class TestDeteminingBlockType(unittest.TestCase):
+    def test_should_recognize_heading(self):
+        type = detemine_block_type("## Heading!")
+        self.assertEqual(type, BlockType.HEADING)
+
+    def test_should_recognize_code(self):
+        type = detemine_block_type("""```
+public static class Program
+{
+    public static void Main(stirng[])
+    {
+        return 0;
+    }                       
+}
+```""")
+        self.assertEqual(type, BlockType.CODE)
 
 class TestSplittingEmptyText(unittest.TestCase):
     def test_should_return_empty_list(self):
