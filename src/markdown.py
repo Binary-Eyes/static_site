@@ -64,3 +64,37 @@ def split_nodes_image(source_nodes):
             nodes.append(TextNode(text, TextType.TEXT))
 
     return nodes
+
+
+def split_nodes_link(source_nodes):
+    nodes = []
+    for source_node in source_nodes:
+        if source_node.text == '':
+            continue
+
+        if source_node.text_type != TextType.TEXT:
+            nodes.append(source_node)
+            continue
+
+        links = extract_markdown_links(source_node.text)
+        if len(links) == 0:
+            nodes.append(source_node)
+            continue
+
+        text = source_node.text
+        for link in links:            
+            link_tag = f"[{link[0]}]({link[1]})"
+            split_text = text.split(link_tag, 1)
+            if len(split_text) != 2:
+                raise ValueError('invalid markdown: link section is incorrect')
+
+            if split_text[0] != '':
+                nodes.append(TextNode(split_text[0], TextType.TEXT))
+            
+            nodes.append(TextNode(link[0], TextType.LINK, link[1]))
+            text = split_text[1]
+        
+        if text != '':
+            nodes.append(TextNode(text, TextType.TEXT))
+
+    return nodes
