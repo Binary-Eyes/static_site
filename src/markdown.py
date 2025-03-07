@@ -32,15 +32,35 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
     return new_nodes
 
-def split_nodes_image(old_nodes):
-    new_nodes = []
-    for old_node in old_nodes:
-        if old_node.text == '':
+def split_nodes_image(source_nodes):
+    nodes = []
+    for source_node in source_nodes:
+        if source_node.text == '':
             continue
 
-        images = extract_markdown_images(old_node.text)
-        if len(images) == 0:
-            new_nodes.append(old_node)
+        if source_node.text_type != TextType.TEXT:
+            nodes.append(source_node)
             continue
+
+        images = extract_markdown_images(source_node.text)
+        if len(images) == 0:
+            nodes.append(source_node)
+            continue
+
+        text = source_node.text
+        for image in images:            
+            image_tag = f"![{image[0]}]({image[1]})"
+            split_text = text.split(image_tag, 1)
+            if len(split_text) != 2:
+                raise ValueError('invalid markdown: image section is incorrect')
+
+            if split_text[0] != '':
+                nodes.append(TextNode(split_text[0], TextType.TEXT))
+            
+            nodes.append(TextNode(image[0], TextType.IMAGE, image[1]))
+            text = split_text[1]
         
-    return new_nodes
+        if text != '':
+            nodes.append(TextNode(text, TextType.TEXT))
+
+    return nodes
