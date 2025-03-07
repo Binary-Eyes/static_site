@@ -19,10 +19,26 @@ class TestSplittingNodeWithNoImage(unittest.TestCase):
 
 
 class TestSplittingNodeWithOneImageInMiddle(unittest.TestCase):
-    def get_nodes(self):
-        node = TextNode("image string ![image](www.image.png) is image", TextType.TEXT)
-        return [node]
-    
     def test_should_return_three_nodes(self):
-        split = split_nodes_image(self.get_nodes())
+        node = TextNode("image string ![image](www.image.png) is image", TextType.TEXT)
+        split = split_nodes_image([node])
         self.assertEqual(len(split), 3)
+
+class TestSplittingNodeWithOneImageOnLeft(unittest.TestCase):
+    def test_should_return_2_nodes(self):
+        node = TextNode("![image](www.image.png) is image", TextType.TEXT)
+        split = split_nodes_image([node])
+        self.assertEqual(len(split), 2)
+    
+    def test_should_return_expected_node_0(self):
+        node = TextNode("![image](www.image.png) is image", TextType.TEXT)
+        split = split_nodes_image([node])
+        self.assertEqual(split[0].text, "image")
+        self.assertEqual(split[0].text_type, TextType.IMAGE)
+        self.assertEqual(split[0].url, "www.image.png")
+
+class TestSplittingNodeWithOneImageOnRight(unittest.TestCase):
+    def test_should_return_two_nodes(self):
+        node = TextNode("image string ![image](www.image.png)", TextType.TEXT)
+        split = split_nodes_image([node])
+        self.assertEqual(len(split), 2)
